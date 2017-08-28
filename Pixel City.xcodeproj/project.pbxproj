@@ -391,6 +391,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Z3BGLCCPGN;
 				INFOPLIST_FILE = "Pixel City/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vashishtapps.Pixel-City";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -406,6 +407,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Z3BGLCCPGN;
 				INFOPLIST_FILE = "Pixel City/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vashishtapps.Pixel-City";
 				PRODUCT_NAME = "$(TARGET_NAME)";
