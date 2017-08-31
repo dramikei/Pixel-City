@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 import MapKit
 import CoreLocation
 
@@ -27,6 +29,8 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
     var flowLayout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView?
+    
+    var imgUrlArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,6 +148,9 @@ extension MapVC: MKMapViewDelegate {
         
         mapView.setRegion(coordinateRegion, animated: true)
         
+        retrieveUrls(forAnnotation: annotation) { (true) in
+            print(self.imgUrlArray)
+        }
         
         
     }
@@ -152,6 +159,27 @@ extension MapVC: MKMapViewDelegate {
             mapView.removeAnnotation(annotation)
         }
     }
+    
+    func retrieveUrls(forAnnotation annotation: DropablePin, handler: @escaping (_ status: Bool) -> ()) {
+        imgUrlArray = []
+        let url = flickrUrl(forApiKey: API_KEY, withAnnotation: annotation, numberOfPhotos: 40)
+        print(url)
+        Alamofire.request(url).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let json = response.result.value as? Dictionary<String, AnyObject> else { return }
+                let photosDict = json["photos"] as! Dictionary<String, AnyObject>
+                let photosDictionary = photosDict["photo"] as! [Dictionary<String,AnyObject>]
+                for photo in photosDictionary {
+                    let postURL = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
+                    self.imgUrlArray.append(postURL)
+                }
+                handler(true)
+                
+            }
+        }
+    }
+    
+    
     
 }
 
